@@ -1,10 +1,16 @@
 import React from 'react';
+import $ from 'styled-components';
 
-function App() {
+const $App = $.div`
+
+`;
+
+export const App = () => {
   return (
-    <div className="App">
-    </div>
+    <$App>
+
+    </$App>
   );
 }
 
-export default App;
+
