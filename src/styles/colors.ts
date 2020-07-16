@@ -1,3 +1,4 @@
+export const black = '#000';
 export const grey1 = '#111';
 export const grey2 = '#222';
 export const grey3 = '#333';
@@ -12,3 +13,4 @@ export const greyB = '#BBB';
 export const greyC = '#CCC';
 export const greyD = '#DDD';
 export const greyE = '#EEE';
+export const white = '#FFF';

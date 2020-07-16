@@ -16,6 +16,7 @@ import {
 export const $App = $.div`
   background-color: ${colors.greyE};
   display: grid;
+  gap: 1.6rem;
   grid-template:
     "header  "
     "canvas  "
@@ -38,10 +39,10 @@ export const $App = $.div`
 
   ${media.large} {
     grid-template:
-      "header   header header " auto
-      "controls canvas minimap" 1fr
-      "footer   canvas layers " 1fr
-    /  1fr      54rem  1fr    ;
+      "header header   header header  header" auto
+      "...... controls canvas minimap ......" auto
+      "...... footer   canvas layers  ......" 1fr
+    /  0      1fr      54rem  1fr     0     ;
   }
 `;
 
