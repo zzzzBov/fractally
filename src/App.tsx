@@ -8,11 +8,41 @@ import {
   Layers,
   MiniMap
 } from './components/';
-import { colors } from './styles';
+import {
+  colors,
+  media
+} from './styles';
 
 export const $App = $.div`
   background-color: ${colors.greyE};
+  display: grid;
+  grid-template:
+    "header  "
+    "canvas  "
+    "controls"
+    "minimap "
+    "layers  "
+    "footer  "
+  /  1fr     ;
   min-height: 100%;
+
+  ${media.medium} {
+    grid-template:
+      "header   header "
+      "canvas   canvas "
+      "controls minimap"
+      "layers   minimap"
+      "footer   footer "
+    /  1fr      1fr    ;
+  }
+
+  ${media.large} {
+    grid-template:
+      "header   header header " auto
+      "controls canvas minimap" 1fr
+      "footer   canvas layers " 1fr
+    /  1fr      54rem  1fr    ;
+  }
 `;
 
 export interface IAppProps {
