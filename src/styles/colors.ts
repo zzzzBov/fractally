@@ -1,0 +1,14 @@
+export const grey1 = '#111';
+export const grey2 = '#222';
+export const grey3 = '#333';
+export const grey4 = '#444';
+export const grey5 = '#555';
+export const grey6 = '#666';
+export const grey7 = '#777';
+export const grey8 = '#888';
+export const grey9 = '#999';
+export const greyA = '#AAA';
+export const greyB = '#BBB';
+export const greyC = '#CCC';
+export const greyD = '#DDD';
+export const greyE = '#EEE';

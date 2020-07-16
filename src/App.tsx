@@ -8,9 +8,11 @@ import {
   Layers,
   MiniMap
 } from './components/';
+import { colors } from './styles';
 
 export const $App = $.div`
-  
+  background-color: ${colors.greyE};
+  min-height: 100%;
 `;
 
 export interface IAppProps {
