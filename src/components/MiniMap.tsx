@@ -1,6 +1,8 @@
 import React, {FC} from 'react';
 import $ from 'styled-components';
-import { colors } from '../styles';
+import { colors } from 'styles/';
+import { ILayer } from 'types/';
+import { getBoundingBox } from 'utils/';
 
 export const $MiniMap = $.div`
   background-color: ${colors.white};
@@ -9,13 +11,17 @@ export const $MiniMap = $.div`
 `;
 
 export interface IMiniMapProps {
-
+  layers: ILayer[]
 }
 
-export const MiniMap: FC<IMiniMapProps> = ({children}) => {
+export const MiniMap: FC<IMiniMapProps> = ({
+  layers
+}) => {
+  const boundingBox = getBoundingBox(layers)
+
   return (
     <$MiniMap>
-      <svg>
+      <svg viewBox={boundingBox}>
         
       </svg>
     </$MiniMap>

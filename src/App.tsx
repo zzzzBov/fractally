@@ -7,11 +7,11 @@ import {
   Header,
   Layers,
   MiniMap
-} from './components/';
+} from 'components/';
 import {
   colors,
   media
-} from './styles';
+} from 'styles/';
 
 export const $App = $.div`
   background-color: ${colors.greyE};
@@ -56,7 +56,7 @@ export const App: FC<IAppProps> = () => {
       <Header />
       <Canvas />
       <Controls />
-      <MiniMap />
+      <MiniMap layers={[]} />
       <Layers />
       <Footer />
     </$App>

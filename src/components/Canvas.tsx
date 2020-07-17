@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import $ from 'styled-components';
-import { colors } from '../styles';
+import { colors } from 'styles/';
 
 export const $Canvas = $.div`
   background-color: ${colors.white};
