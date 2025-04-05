@@ -1,8 +1,10 @@
-import { PropsWithChildren } from "react";
+import { PointerEvent, PropsWithChildren, useCallback } from "react";
 import style from "./Fractally.module.scss";
 import { BaseLine, DerivedLines, GripLine } from "@/components/Geometry";
 import { CenterButton, Zoom } from "@/components/Controls";
 import { Data } from "@/components/Data";
+import { useDataService } from "@/hooks/useDataService";
+import { BUTTONS } from "@/lib/ui";
 
 export function Fractally() {
   return (
@@ -27,8 +29,68 @@ function Container({ children }: PropsWithChildren) {
 }
 
 export function Canvas({ children }: PropsWithChildren) {
+  const { status, startPanning, stopPanning, pan, viewport } = useDataService();
+
+  const pointerDown = useCallback(
+    (e: PointerEvent<SVGSVGElement>) => {
+      if (e.button === BUTTONS.MIDDLE) {
+        e.currentTarget.setPointerCapture(e.pointerId);
+        const canvas = e.currentTarget;
+        const point = canvas.createSVGPoint();
+        point.x = e.clientX;
+        point.y = e.clientY;
+        const { x, y } = point.matrixTransform(
+          canvas.getScreenCTM()?.inverse()
+        );
+
+        startPanning({
+          x,
+          y,
+        });
+      }
+    },
+    [startPanning]
+  );
+
+  const pointerMove = useCallback(
+    (e: PointerEvent<SVGSVGElement>) => {
+      if (status === "panning") {
+        const canvas = e.currentTarget;
+        const point = canvas.createSVGPoint();
+        point.x = e.clientX;
+        point.y = e.clientY;
+        const { x, y } = point.matrixTransform(
+          canvas.getScreenCTM()?.inverse()
+        );
+
+        pan({
+          x,
+          y,
+        });
+      }
+    },
+    [pan, status]
+  );
+
+  const pointerUp = useCallback(
+    (e: PointerEvent<SVGSVGElement>) => {
+      if (e.button === BUTTONS.MIDDLE) {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+        stopPanning();
+      }
+    },
+    [stopPanning]
+  );
+
   return (
-    <svg className={style.canvas} viewBox="0 0 16 16">
+    <svg
+      className={style.canvas}
+      viewBox={`${viewport.x} ${viewport.y} ${viewport.width} ${viewport.height}`}
+      data-status={status}
+      onPointerDown={pointerDown}
+      onPointerMove={pointerMove}
+      onPointerUp={pointerUp}
+    >
       {children}
     </svg>
   );

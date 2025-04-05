@@ -2,15 +2,19 @@ import { DataServiceState, Point } from "@/slices/DataService";
 import { createContext } from "react";
 
 interface DataServiceActions {
+  center: () => void;
   drag: (payload: { grip: "start" | "end"; point: Point }) => void;
   startDragging: () => void;
   stopDragging: () => void;
+  startPanning: (payload: Point) => void;
+  pan: (payload: Point) => void;
+  stopPanning: () => void;
 }
 
 type DataService = DataServiceState & DataServiceActions;
 
 export const DataServiceContext = createContext<DataService>({
-  dragging: false,
+  status: "idle",
   baseline: {
     start: {
       x: 0,
@@ -31,6 +35,21 @@ export const DataServiceContext = createContext<DataService>({
       y: 0,
     },
   },
+  panning: {
+    last: {
+      x: 0,
+      y: 0,
+    },
+  },
+  viewport: {
+    x: 0,
+    y: 0,
+    width: 16,
+    height: 16,
+  },
+  center() {
+    // noop
+  },
   drag() {
     // noop
   },
@@ -38,6 +57,15 @@ export const DataServiceContext = createContext<DataService>({
     // noop
   },
   stopDragging() {
+    // noop
+  },
+  startPanning() {
+    // noop
+  },
+  pan() {
+    // noop
+  },
+  stopPanning() {
     // noop
   },
 });

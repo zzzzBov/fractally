@@ -15,4 +15,8 @@
   fill: blue;
   stroke: blue;
   stroke-width: 0.05;
+
+  [data-status="dragging"] & {
+    cursor: inherit;
+  }
 }

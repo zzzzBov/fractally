@@ -1,5 +1,6 @@
 import style from "@/components/Geometry.module.scss";
 import { useDataService } from "@/hooks/useDataService";
+import { BUTTONS } from "@/lib/ui";
 import { PointerEvent, useCallback } from "react";
 
 export function BaseLine() {
@@ -11,12 +12,12 @@ export function DerivedLines() {
 }
 
 export function GripLine() {
-  const { drag, dragging, gripline, startDragging, stopDragging } =
+  const { drag, status, gripline, startDragging, stopDragging } =
     useDataService();
 
   const pointerDown = useCallback(
     (e: PointerEvent<SVGCircleElement>) => {
-      if (e.button === 0) {
+      if (e.button === BUTTONS.LEFT) {
         e.currentTarget.setPointerCapture(e.pointerId);
         startDragging();
       }
@@ -26,7 +27,7 @@ export function GripLine() {
 
   const pointerMove = useCallback(
     (e: PointerEvent<SVGCircleElement>) => {
-      if (dragging) {
+      if (status === "dragging") {
         // transform clientX and clientY to a point in SVG space
         const canvas = e.currentTarget.closest("svg")!;
         const point = canvas.createSVGPoint();
@@ -45,12 +46,12 @@ export function GripLine() {
         });
       }
     },
-    [drag, dragging]
+    [drag, status]
   );
 
   const pointerUp = useCallback(
     (e: PointerEvent<SVGCircleElement>) => {
-      if (e.button === 0) {
+      if (e.button === BUTTONS.LEFT) {
         e.currentTarget.releasePointerCapture(e.pointerId);
         stopDragging();
       }
