@@ -1,0 +1,28 @@
+.container {
+  display: grid;
+  grid-template:
+    [full-start top-start]
+    auto
+    [top-end center-start]
+    1fr
+    [center-end bottom-start]
+    auto
+    [bottom-end full-end]
+    / [full-start left-start] auto [left-end center-start] 1fr [center-end right-start] auto [right-end full-end];
+  height: 100%;
+}
+
+.canvas {
+  grid-area: full;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.controls {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  grid-area: bottom / right;
+  margin: 1rem;
+}
