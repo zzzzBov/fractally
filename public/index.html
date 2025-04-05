@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fractally</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <svg class="canvas" viewBox="0 0 16 16">
+        <line
+          class="baseline"
+          x1="4"
+          y1="8"
+          x2="12"
+          y2="8"
+          stroke="currentColor"
+          stroke-width="0.2"
+          stroke-linecap="round"
+        />
+        <g class="gripline">
+          <line
+            x1="12.2"
+            y1="7.4"
+            x2="6.9"
+            y2="2.1"
+            stroke="currentColor"
+            stroke-width="0.2"
+            stroke-linecap="round"
+          />
+          <circle
+            class="touch"
+            cx="12.2"
+            cy="7.4"
+            r="1"
+            fill="transparent"
+            stroke="transparent"
+          />
+          <circle
+            class="touch"
+            cx="6.9"
+            cy="2.1"
+            r="1"
+            fill="transparent"
+            stroke="transparent"
+          />
+          <circle
+            class="grip"
+            cx="12.2"
+            cy="7.4"
+            r="0.12"
+            fill="blue"
+            stroke="blue"
+            stroke-width="0.05"
+            cursor="grab"
+          />
+          <circle
+            class="grip"
+            cx="6.9"
+            cy="2.1"
+            r="0.12"
+            fill="blue"
+            stroke="blue"
+            stroke-width="0.05"
+            cursor="grab"
+          />
+        </g>
+      </svg>
+      <div class="controls">
+        <button class="center" type="button">
+          <svg viewBox="-3 -3 6 6" width="30" height="30">
+            <title>Center canvas</title>
+            <circle
+              cx="0"
+              cy="0"
+              r="1.25"
+              stroke="currentColor"
+              stroke-width="0.4"
+              fill="transparent"
+            />
+            <circle cx="0" cy="0" r="0.375" fill="currentColor" />
+            <line
+              x1="-2"
+              y1="0"
+              x2="-1.25"
+              y2="0"
+              stroke="currentColor"
+              stroke-width="0.4"
+            />
+            <line
+              x1="2"
+              y1="0"
+              x2="1.25"
+              y2="0"
+              stroke="currentColor"
+              stroke-width="0.4"
+            />
+            <line
+              x1="0"
+              y1="-2"
+              x2="0"
+              y2="-1.25"
+              stroke="currentColor"
+              stroke-width="0.4"
+            />
+            <line
+              x1="0"
+              y1="2"
+              x2="0"
+              y2="1.25"
+              stroke="currentColor"
+              stroke-width="0.4"
+            />
+          </svg>
+        </button>
+
+        <button class="zoom-out" type="button">
+          <svg viewBox="-3 -3 6 6" width="30" height="30">
+            <title>Zoom in</title>
+            <line
+              x1="-2"
+              y1="0"
+              x2="2"
+              y2="0"
+              stroke="currentColor"
+              stroke-width="0.4"
+            />
+            <line
+              x1="0"
+              y1="-2"
+              x2="0"
+              y2="2"
+              stroke="currentColor"
+              stroke-width="0.4"
+            />
+          </svg>
+        </button>
+
+        <button class="zoom-in" type="button" aria-label="Zoom in">
+          <svg viewBox="-3 -3 6 6" width="30" height="30">
+            <title>Zoom out</title>
+            <line
+              x1="-2"
+              y1="0"
+              x2="2"
+              y2="0"
+              stroke="currentColor"
+              stroke-width="0.4"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

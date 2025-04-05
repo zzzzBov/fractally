@@ -1,0 +1,73 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  appearance: none;
+  background-color: #eee;
+  border-color: #888;
+  border-radius: 0.25rem;
+  border-style: solid;
+  border-width: 0.125rem;
+  color: #333;
+  font-family: monospace;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0;
+  vertical-align: middle;
+
+  svg {
+    vertical-align: top;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: #f8f8f8;
+    border-color: #555;
+    color: #000;
+  }
+
+  &:focus-visible {
+    outline: 0.0625rem solid #008;
+    outline-offset: -0.25rem;
+  }
+
+  &:active {
+    background-color: #eee;
+    border-color: #555;
+    color: #000;
+  }
+}
+
+.container {
+  display: grid;
+  grid-template:
+    [full-start top-start]
+    auto
+    [top-end center-start]
+    1fr
+    [center-end bottom-start]
+    auto
+    [bottom-end full-end]
+    / [full-start left-start] auto [left-end center-start] 1fr [center-end right-start] auto [right-end full-end];
+  height: 100%;
+}
+
+.canvas {
+  grid-area: full;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.controls {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  grid-area: bottom / right;
+  margin: 1rem;
+}
