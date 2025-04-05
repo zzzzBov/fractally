@@ -1,5 +1,18 @@
-.baseline {
+.baseline,
+.gripline {
   stroke: currentColor;
   stroke-linecap: round;
   stroke-width: 0.2;
+}
+
+.touch {
+  fill: transparent;
+  stroke: transparent;
+}
+
+.grip {
+  cursor: grab;
+  fill: blue;
+  stroke: blue;
+  stroke-width: 0.05;
 }
