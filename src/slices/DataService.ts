@@ -114,5 +114,28 @@ export default createSlice({
         state.status = "idle";
       }
     },
+    zoom(
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        center?: Point;
+        zoom: number;
+      }>
+    ) {
+      const center = payload.center ?? {
+        x: state.viewport.x + (state.viewport.width - state.viewport.x) / 2,
+        y: state.viewport.y + (state.viewport.height - state.viewport.y) / 2,
+      };
+      const delta = {
+        x: center.x - state.viewport.x,
+        y: center.y - state.viewport.y,
+      };
+
+      state.viewport.x = center.x - delta.x * payload.zoom;
+      state.viewport.y = center.y - delta.y * payload.zoom;
+      state.viewport.width *= payload.zoom;
+      state.viewport.height *= payload.zoom;
+    },
   },
 });

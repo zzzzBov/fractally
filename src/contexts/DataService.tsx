@@ -9,6 +9,7 @@ interface DataServiceActions {
   startPanning: (payload: Point) => void;
   pan: (payload: Point) => void;
   stopPanning: () => void;
+  zoom: (payload: { center?: Point; zoom: number }) => void;
 }
 
 type DataService = DataServiceState & DataServiceActions;
@@ -67,6 +68,9 @@ export const DataServiceContext = createContext<DataService>({
     // noop
   },
   stopPanning() {
+    // noop
+  },
+  zoom() {
     // noop
   },
 });

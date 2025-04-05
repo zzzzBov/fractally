@@ -1,7 +1,7 @@
 import style from "@/components/Geometry.module.scss";
 import { useDataService } from "@/hooks/useDataService";
 import { BUTTONS } from "@/lib/ui";
-import { PointerEvent, useCallback, useMemo } from "react";
+import { PointerEvent, useCallback, useEffect, useMemo, useState } from "react";
 
 export function BaseLine() {
   return <line className={style.baseline} x1={4} y1={8} x2={12} y2={8} />;
@@ -94,8 +94,24 @@ export function DerivedLines() {
 }
 
 export function GripLine() {
-  const { drag, status, gripline, startDragging, stopDragging } =
+  const { drag, status, gripline, startDragging, stopDragging, viewport } =
     useDataService();
+
+  const [canvasSize, setCanvasSize] = useState(new DOMRect());
+
+  useEffect(() => {
+    const resize = new ResizeObserver(([entry]) => {
+      setCanvasSize(entry.contentRect);
+    });
+
+    resize.observe(document.documentElement, {
+      box: "border-box",
+    });
+
+    return () => {
+      resize.unobserve(document.documentElement);
+    };
+  }, []);
 
   const pointerDown = useCallback(
     (e: PointerEvent<SVGCircleElement>) => {
@@ -135,6 +151,12 @@ export function GripLine() {
     [stopDragging]
   );
 
+  const gripRadius = useMemo(() => {
+    const px = viewport.width / Math.min(canvasSize.width, canvasSize.height);
+
+    return Math.max(7.5 * px, 0.12);
+  }, [viewport, canvasSize]);
+
   return (
     <g>
       <line
@@ -167,20 +189,20 @@ export function GripLine() {
         className={style.grip}
         cx={gripline.start.x}
         cy={gripline.start.y}
+        r={gripRadius}
         onPointerDown={pointerDown}
         onPointerMove={pointerMove}
         onPointerUp={pointerUp}
-        r="0.12"
       />
       <circle
         data-grip="end"
         className={style.grip}
         cx={gripline.end.x}
         cy={gripline.end.y}
+        r={gripRadius}
         onPointerDown={pointerDown}
         onPointerMove={pointerMove}
         onPointerUp={pointerUp}
-        r="0.12"
       />
     </g>
   );
