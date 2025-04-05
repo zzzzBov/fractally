@@ -21,7 +21,7 @@ export function useSlice<
         dispatch(action);
         return action;
       }),
-    []
+    [slice.actions]
   );
 
   return [state, actions] as const;

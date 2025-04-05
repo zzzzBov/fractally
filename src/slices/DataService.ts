@@ -1,21 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Point {
+export interface Point {
   x: number;
   y: number;
 }
 
-interface Line {
+export interface Line {
   start: Point;
   end: Point;
 }
 
 export interface DataServiceState {
+  dragging: boolean;
   baseline: Line;
   gripline: Line;
 }
 
-const initialState = {
+const initialState: DataServiceState = {
+  dragging: false,
   baseline: {
     start: {
       x: 4,
@@ -36,10 +38,28 @@ const initialState = {
       y: 2.1,
     },
   },
-} satisfies DataServiceState;
+};
 
 export default createSlice({
   name: "data",
   initialState,
-  reducers: {},
+  reducers: {
+    drag(
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        grip: "start" | "end";
+        point: Point;
+      }>
+    ) {
+      state.gripline[payload.grip] = payload.point;
+    },
+    startDragging(state) {
+      state.dragging = true;
+    },
+    stopDragging(state) {
+      state.dragging = false;
+    },
+  },
 });
