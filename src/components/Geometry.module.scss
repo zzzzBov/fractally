@@ -20,3 +20,8 @@
     cursor: inherit;
   }
 }
+
+.derivedline {
+  stroke: currentColor;
+  stroke-linecap: round;
+}

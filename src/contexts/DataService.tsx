@@ -47,6 +47,7 @@ export const DataServiceContext = createContext<DataService>({
     width: 16,
     height: 16,
   },
+  lineCount: 64,
   center() {
     // noop
   },

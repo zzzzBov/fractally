@@ -25,6 +25,7 @@ export interface DataServiceState {
   gripline: Line;
   viewport: Rect;
   panning: PanningMetadata;
+  lineCount: number;
 }
 
 const initialState: DataServiceState = {
@@ -61,6 +62,7 @@ const initialState: DataServiceState = {
     width: 16,
     height: 16,
   },
+  lineCount: 64,
 };
 
 export default createSlice({
