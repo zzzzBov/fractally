@@ -2,20 +2,23 @@ import { PropsWithChildren } from "react";
 import style from "./Fractally.module.scss";
 import { BaseLine, DerivedLines, GripLine } from "@/components/Geometry";
 import { CenterButton, Zoom } from "@/components/Controls";
+import { Data } from "@/components/Data";
 
 export function Fractally() {
   return (
-    <Container>
-      <Canvas>
-        <BaseLine />
-        <DerivedLines />
-        <GripLine />
-      </Canvas>
-      <Controls>
-        <CenterButton />
-        <Zoom />
-      </Controls>
-    </Container>
+    <Data>
+      <Container>
+        <Canvas>
+          <BaseLine />
+          <DerivedLines />
+          <GripLine />
+        </Canvas>
+        <Controls>
+          <CenterButton />
+          <Zoom />
+        </Controls>
+      </Container>
+    </Data>
   );
 }
 
