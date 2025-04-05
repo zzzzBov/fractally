@@ -30,19 +30,13 @@ export function GripLine() {
       if (status === "dragging") {
         // transform clientX and clientY to a point in SVG space
         const canvas = e.currentTarget.closest("svg")!;
-        const point = canvas.createSVGPoint();
-        point.x = e.clientX;
-        point.y = e.clientY;
-        const { x, y } = point.matrixTransform(
+        const point = new DOMPoint(e.clientX, e.clientY).matrixTransform(
           canvas.getScreenCTM()?.inverse()
         );
 
         drag({
           grip: e.currentTarget.dataset.grip as "start" | "end",
-          point: {
-            x,
-            y,
-          },
+          point,
         });
       }
     },

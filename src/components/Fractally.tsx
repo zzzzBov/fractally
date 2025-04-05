@@ -36,17 +36,11 @@ export function Canvas({ children }: PropsWithChildren) {
       if (e.button === BUTTONS.MIDDLE) {
         e.currentTarget.setPointerCapture(e.pointerId);
         const canvas = e.currentTarget;
-        const point = canvas.createSVGPoint();
-        point.x = e.clientX;
-        point.y = e.clientY;
-        const { x, y } = point.matrixTransform(
+        const point = new DOMPoint(e.clientX, e.clientY).matrixTransform(
           canvas.getScreenCTM()?.inverse()
         );
 
-        startPanning({
-          x,
-          y,
-        });
+        startPanning(point);
       }
     },
     [startPanning]
@@ -56,17 +50,11 @@ export function Canvas({ children }: PropsWithChildren) {
     (e: PointerEvent<SVGSVGElement>) => {
       if (status === "panning") {
         const canvas = e.currentTarget;
-        const point = canvas.createSVGPoint();
-        point.x = e.clientX;
-        point.y = e.clientY;
-        const { x, y } = point.matrixTransform(
+        const point = new DOMPoint(e.clientX, e.clientY).matrixTransform(
           canvas.getScreenCTM()?.inverse()
         );
 
-        pan({
-          x,
-          y,
-        });
+        pan(point);
       }
     },
     [pan, status]
