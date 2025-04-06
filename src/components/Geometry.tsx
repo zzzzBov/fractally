@@ -97,7 +97,7 @@ export function GripLine() {
   const { drag, status, gripline, startDragging, stopDragging, viewport } =
     useDataService();
 
-  const [canvasSize, setCanvasSize] = useState(new DOMRect());
+  const [canvasSize, setCanvasSize] = useState(new DOMRect(0, 0, 10, 10));
 
   useEffect(() => {
     const resize = new ResizeObserver(([entry]) => {
