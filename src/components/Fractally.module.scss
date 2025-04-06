@@ -12,6 +12,11 @@
   height: 100%;
 }
 
+.header {
+  grid-area: top / left;
+  padding: 1rem;
+}
+
 .canvas {
   grid-area: full;
   display: block;
@@ -31,4 +36,10 @@
   gap: 0.5rem;
   grid-area: bottom / right;
   margin: 1rem;
+}
+
+.footer {
+  align-self: end;
+  grid-area: bottom / left;
+  padding: 1rem;
 }

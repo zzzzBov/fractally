@@ -16,6 +16,7 @@ export function Fractally() {
   return (
     <Data>
       <Container>
+        <Header />
         <Canvas>
           <BaseLine />
           <DerivedLines />
@@ -25,6 +26,7 @@ export function Fractally() {
           <CenterButton />
           <Zoom />
         </Controls>
+        <Footer />
       </Container>
     </Data>
   );
@@ -34,7 +36,23 @@ function Container({ children }: PropsWithChildren) {
   return <div className={style.container}>{children}</div>;
 }
 
-export function Canvas({ children }: PropsWithChildren) {
+function Header() {
+  return (
+    <header className={style.header}>
+      <h1>Fractally</h1>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className={style.footer}>
+      <p>Copyright &copy; zzzzBov</p>
+    </footer>
+  );
+}
+
+function Canvas({ children }: PropsWithChildren) {
   useUpdateURL();
 
   const { status, startPanning, stopPanning, pan, viewport, zoom } =
@@ -108,6 +126,6 @@ export function Canvas({ children }: PropsWithChildren) {
   );
 }
 
-export function Controls({ children }: PropsWithChildren) {
+function Controls({ children }: PropsWithChildren) {
   return <div className={style.controls}>{children}</div>;
 }
