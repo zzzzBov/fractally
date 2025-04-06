@@ -6,19 +6,19 @@
 }
 
 .touch {
+  cursor: grab;
   fill: transparent;
   stroke: transparent;
-}
-
-.grip {
-  cursor: grab;
-  fill: blue;
-  stroke: blue;
-  stroke-width: 0.05;
 
   [data-status="dragging"] & {
     cursor: inherit;
   }
+}
+
+.grip {
+  fill: blue;
+  stroke: blue;
+  stroke-width: 0.05;
 }
 
 .derivedline {

@@ -115,10 +115,7 @@ export function GripLine() {
 
   const pointerDown = useCallback(
     (e: PointerEvent<SVGCircleElement>) => {
-      if (
-        e.button === BUTTONS.LEFT &&
-        e.currentTarget.dataset.pointerType === e.pointerType
-      ) {
+      if (e.button === BUTTONS.LEFT) {
         e.preventDefault();
         e.currentTarget.setPointerCapture(e.pointerId);
         startDragging();
@@ -177,6 +174,18 @@ export function GripLine() {
         y2={gripline.end.y}
       />
       <circle
+        className={style.grip}
+        cx={gripline.start.x}
+        cy={gripline.start.y}
+        r={gripRadius}
+      />
+      <circle
+        className={style.grip}
+        cx={gripline.end.x}
+        cy={gripline.end.y}
+        r={gripRadius}
+      />
+      <circle
         className={style.touch}
         cx={gripline.start.x}
         cy={gripline.start.y}
@@ -185,7 +194,6 @@ export function GripLine() {
         onPointerMove={pointerMove}
         onPointerUp={pointerUp}
         data-grip="start"
-        data-pointer-type="touch"
       />
       <circle
         className={style.touch}
@@ -196,29 +204,6 @@ export function GripLine() {
         onPointerMove={pointerMove}
         onPointerUp={pointerUp}
         data-grip="end"
-        data-pointer-type="touch"
-      />
-      <circle
-        data-grip="start"
-        className={style.grip}
-        cx={gripline.start.x}
-        cy={gripline.start.y}
-        r={gripRadius}
-        onPointerDown={pointerDown}
-        onPointerMove={pointerMove}
-        onPointerUp={pointerUp}
-        data-pointer-type="mouse"
-      />
-      <circle
-        data-grip="end"
-        className={style.grip}
-        cx={gripline.end.x}
-        cy={gripline.end.y}
-        r={gripRadius}
-        onPointerDown={pointerDown}
-        onPointerMove={pointerMove}
-        onPointerUp={pointerUp}
-        data-pointer-type="mouse"
       />
     </g>
   );
