@@ -1,4 +1,9 @@
-import { PointerEvent, PropsWithChildren, useCallback } from "react";
+import {
+  PointerEvent,
+  PropsWithChildren,
+  useCallback,
+  WheelEvent,
+} from "react";
 import style from "./Fractally.module.scss";
 import { BaseLine, DerivedLines, GripLine } from "@/components/Geometry";
 import { CenterButton, Zoom } from "@/components/Controls";
@@ -29,7 +34,8 @@ function Container({ children }: PropsWithChildren) {
 }
 
 export function Canvas({ children }: PropsWithChildren) {
-  const { status, startPanning, stopPanning, pan, viewport } = useDataService();
+  const { status, startPanning, stopPanning, pan, viewport, zoom } =
+    useDataService();
 
   const pointerDown = useCallback(
     (e: PointerEvent<SVGSVGElement>) => {
@@ -70,6 +76,20 @@ export function Canvas({ children }: PropsWithChildren) {
     [stopPanning]
   );
 
+  const wheel = useCallback(
+    (e: WheelEvent<SVGSVGElement>) => {
+      const point = new DOMPoint(e.clientX, e.clientY).matrixTransform(
+        e.currentTarget.getScreenCTM()?.inverse()
+      );
+
+      zoom({
+        center: point,
+        zoom: e.deltaY > 0 ? 1.1 : 1 / 1.1,
+      });
+    },
+    [zoom]
+  );
+
   return (
     <svg
       className={style.canvas}
@@ -78,6 +98,7 @@ export function Canvas({ children }: PropsWithChildren) {
       onPointerDown={pointerDown}
       onPointerMove={pointerMove}
       onPointerUp={pointerUp}
+      onWheel={wheel}
     >
       {children}
     </svg>
