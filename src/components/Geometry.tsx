@@ -115,7 +115,11 @@ export function GripLine() {
 
   const pointerDown = useCallback(
     (e: PointerEvent<SVGCircleElement>) => {
-      if (e.button === BUTTONS.LEFT) {
+      if (
+        e.button === BUTTONS.LEFT &&
+        e.currentTarget.dataset.pointerType === e.pointerType
+      ) {
+        e.preventDefault();
         e.currentTarget.setPointerCapture(e.pointerId);
         startDragging();
       }
@@ -157,6 +161,12 @@ export function GripLine() {
     return Math.max(7.5 * px, 0.12);
   }, [viewport, canvasSize]);
 
+  const touchRadius = useMemo(() => {
+    const px = viewport.width / Math.min(canvasSize.width, canvasSize.height);
+
+    return 25 * px;
+  }, [viewport, canvasSize]);
+
   return (
     <g>
       <line
@@ -170,19 +180,23 @@ export function GripLine() {
         className={style.touch}
         cx={gripline.start.x}
         cy={gripline.start.y}
-        r="1"
-        // onPointerDown={pointerDown}
-        // onPointerMove={pointerMove}
-        // onPointerUp={pointerUp}
+        r={touchRadius}
+        onPointerDown={pointerDown}
+        onPointerMove={pointerMove}
+        onPointerUp={pointerUp}
+        data-grip="start"
+        data-pointer-type="touch"
       />
       <circle
         className={style.touch}
         cx={gripline.end.x}
         cy={gripline.end.y}
-        // onPointerDown={pointerDown}
-        // onPointerMove={pointerMove}
-        // onPointerUp={pointerUp}
-        r="1"
+        r={touchRadius}
+        onPointerDown={pointerDown}
+        onPointerMove={pointerMove}
+        onPointerUp={pointerUp}
+        data-grip="end"
+        data-pointer-type="touch"
       />
       <circle
         data-grip="start"
@@ -193,6 +207,7 @@ export function GripLine() {
         onPointerDown={pointerDown}
         onPointerMove={pointerMove}
         onPointerUp={pointerUp}
+        data-pointer-type="mouse"
       />
       <circle
         data-grip="end"
@@ -203,6 +218,7 @@ export function GripLine() {
         onPointerDown={pointerDown}
         onPointerMove={pointerMove}
         onPointerUp={pointerUp}
+        data-pointer-type="mouse"
       />
     </g>
   );
