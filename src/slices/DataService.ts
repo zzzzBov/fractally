@@ -1,3 +1,4 @@
+import { getLineCount, getPointFromQuery, getRectFromQuery } from "@/lib/url";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Point {
@@ -41,14 +42,14 @@ const initialState: DataServiceState = {
     },
   },
   gripline: {
-    start: {
+    start: getPointFromQuery("start", {
       x: 12.2,
       y: 7.4,
-    },
-    end: {
+    }),
+    end: getPointFromQuery("end", {
       x: 6.9,
       y: 2.1,
-    },
+    }),
   },
   panning: {
     last: {
@@ -56,13 +57,13 @@ const initialState: DataServiceState = {
       y: 0,
     },
   },
-  viewport: {
+  viewport: getRectFromQuery("viewport", {
     x: 0,
     y: 0,
     width: 16,
     height: 16,
-  },
-  lineCount: 64,
+  }),
+  lineCount: getLineCount(64),
 };
 
 export default createSlice({

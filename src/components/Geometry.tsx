@@ -50,8 +50,8 @@ export function DerivedLines() {
       [C, D],
     ];
 
-    for (let i = 0; i < lineCount; i++) {
-      const [C, D] = lines[i + 1];
+    for (let i = 1; i < lineCount - 1; i++) {
+      const [C, D] = lines[i];
 
       const dCDx = D.x - C.x;
       const dCDy = D.y - C.y;

@@ -10,6 +10,7 @@ import { CenterButton, Zoom } from "@/components/Controls";
 import { Data } from "@/components/Data";
 import { useDataService } from "@/hooks/useDataService";
 import { BUTTONS } from "@/lib/ui";
+import { useUpdateURL } from "@/hooks/useUpdateURL";
 
 export function Fractally() {
   return (
@@ -34,6 +35,8 @@ function Container({ children }: PropsWithChildren) {
 }
 
 export function Canvas({ children }: PropsWithChildren) {
+  useUpdateURL();
+
   const { status, startPanning, stopPanning, pan, viewport, zoom } =
     useDataService();
 
