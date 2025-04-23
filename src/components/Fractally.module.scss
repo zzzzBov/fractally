@@ -11,8 +11,6 @@
     / [full-start left-start] auto [left-end center-start] 1fr [center-end right-start] auto [right-end full-end];
   height: 100%;
   isolation: isolate;
-  --canvas-index: 1;
-  --controls-index: 2;
 }
 
 .header {
@@ -26,7 +24,6 @@
   height: 100%;
   touch-action: none;
   width: 100%;
-  z-index: var(--canvas-index);
 
   &[data-status="dragging"],
   &[data-status="panning"] {
@@ -40,7 +37,6 @@
   gap: 0.5rem;
   grid-area: bottom / right;
   margin: 1rem;
-  z-index: var(--controls-index);
 }
 
 .footer {

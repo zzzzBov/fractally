@@ -60,6 +60,8 @@ function Canvas({ children }: PropsWithChildren) {
 
   const pointerDown = useCallback(
     (e: PointerEvent<SVGSVGElement>) => {
+      e.preventDefault();
+
       if (e.button === BUTTONS.MIDDLE) {
         e.currentTarget.setPointerCapture(e.pointerId);
         const canvas = e.currentTarget;
